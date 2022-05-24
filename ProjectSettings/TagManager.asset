@@ -11,9 +11,7 @@ TagManager:
   - Ground
   - Water
   - firstLevelWin
-  - FrontGround
-  - BackGround
-  - 'twoLevelWin '
+  - twoLevelWin
   layers:
   - Default
   - TransparentFX

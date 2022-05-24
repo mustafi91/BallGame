@@ -160,6 +160,18 @@ MonoBehaviour:
   roundsChanged:
     m_PersistentCalls:
       m_Calls: []
+  winLevelOne:
+    m_PersistentCalls:
+      m_Calls: []
+  panalLoss:
+    m_PersistentCalls:
+      m_Calls: []
+  freezeActive:
+    m_PersistentCalls:
+      m_Calls: []
+  freezeInactive:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!4 &162147346
 Transform:
   m_ObjectHideFlags: 0

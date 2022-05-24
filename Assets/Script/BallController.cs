@@ -8,25 +8,17 @@ public class BallController : MonoBehaviour
     private Rigidbody rg;
     public InputAction move;
     private Vector2 movement;
-    private Vector3 startPoint;
     public float moveSpeed = 100f;
     private float mainThrust = 500f;
     private float wandThrust = 300f;
     private bool toJump = false;
     private bool frontDirection = true;
-    public GameObject frontWharf;
-    public GameObject backWharf;
-    public GameObject panal;
-    public GameObject panalLoss;
-    public GameObject panalMain;
-    
     
     void Start()
     {
         rg = GetComponent<Rigidbody>();
-        startPoint = transform.position;
-        panal.SetActive(false);
-        panalLoss.SetActive(false);
+        // GameManager.instance.freezeActive.AddListener(ToFreezeActive);
+        // GameManager.instance.freezeInactive.AddListener(ToFreezeInactive); 
     }
 
     void Update()
@@ -34,7 +26,7 @@ public class BallController : MonoBehaviour
         ToMove();
         ToReversing();
         ToJumpOnGround(mainThrust);
-        ToFreeze(); 
+        ToChangeFreezeActive();
     }
 
     void OnEnable()
@@ -50,7 +42,7 @@ public class BallController : MonoBehaviour
     private void ToMove()
     {
         var input = move.ReadValue<Vector2>();
-       
+
         if (frontDirection)
         {
             var vector = new Vector3(-input.y, 0, input.x);
@@ -84,7 +76,7 @@ public class BallController : MonoBehaviour
         }
     }
 
-    private void ToJumpOnLeftWall(float thrust)
+    public void ToJumpOnLeftWall(float thrust)
     {
         if (frontDirection)
         {
@@ -108,100 +100,25 @@ public class BallController : MonoBehaviour
         }
     }
 
-
-    private void ToFreeze()
-    {
+     public void ToChangeFreezeActive(){
         if (Keyboard.current.enterKey.wasPressedThisFrame)
         {
-            GameManager.instance.Freeze = !GameManager.instance.Freeze;
-        }
-        if (GameManager.instance.Freeze)
-        {
-            rg.constraints = RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezeRotationX;
-            rg.constraints = RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.FreezeRotationZ;
-        }
-        else if (!GameManager.instance.Freeze)
-        {
-            rg.constraints = RigidbodyConstraints.None;
+           rg.isKinematic = !rg.isKinematic;
         }
     }
-
-    void OnCollisionEnter(Collision collision)
+     void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag("FrontGround"))
-        {
-            toJump = true;
-            GameManager.instance.FrontGround = true;
-            GameManager.instance.BackGround = false;
-        }
-        else if (collision.gameObject.CompareTag("BackGround"))
-        {   
-            toJump = true;
-            GameManager.instance.FrontGround = false;
-            GameManager.instance.BackGround = true;
-        }
-        else if (collision.gameObject.CompareTag("Stalk"))
+        if (collision.gameObject.CompareTag("Ground") || collision.gameObject.CompareTag("Stalk"))
         {
             toJump = true;
         }
-        else if (collision.gameObject.CompareTag("LeftWall") && !toJump)
+        else if (collision.gameObject.CompareTag("LeftWall") && toJump == false)
         {
             ToJumpOnLeftWall(wandThrust);
         }
-        else if (collision.gameObject.CompareTag("RightWall") && !toJump)
+        else if (collision.gameObject.CompareTag("RightWall") && toJump == false)
         {
             ToJumpOnRightWall(wandThrust);
         }
-        else if (collision.gameObject.CompareTag("Spinner"))
-        {
-            GameManager.instance.LossToPosition = true;
-            GameManager.instance.ToLoss();
-             if (GameManager.instance.GameOver)
-            {
-                panalLoss.SetActive(true);
-                transform.position = startPoint;
-                GameManager.instance.GameOver = false;
-                GameManager.instance.Freeze =true;
-                panalMain.SetActive(false);
-            }
-        }
-        else if (collision.gameObject.CompareTag("Water"))
-        {
-            GameManager.instance.WaterLoss = true;
-           
-            GameManager.instance.ToLoss();
-            if (GameManager.instance.FrontGround)
-            {  
-                transform.position = frontWharf.transform.position;   
-            }
-            else if (GameManager.instance.BackGround)
-            {  
-                transform.position = backWharf.transform.position;   
-            }
-            if (GameManager.instance.GameOver)
-            {
-                panalLoss.SetActive(true);
-                transform.position = startPoint;
-                GameManager.instance.GameOver = false;
-                GameManager.instance.Freeze =true;
-                panalMain.SetActive(false);
-            }
-            
-        }
-        else if (collision.gameObject.CompareTag("firstLevelWin"))
-        {
-            GameManager.instance.ToWinLevelOne();
-            panal.SetActive(true);
-            panalMain.SetActive(false);
-            GameManager.instance.EndLevel = true;
-             // transform.position = startPoint;
-        }
-         else if (collision.gameObject.CompareTag("twoLevelWin"))
-        {
-            GameManager.instance.ToWinLevelTwo();
-        }
-
-
-        
     }
 }

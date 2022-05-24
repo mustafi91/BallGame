@@ -3,94 +3,21 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Events;
+using UnityEngine.InputSystem;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance = null;
     private static int nextScene = 1;
-    private bool freeze = false;
-    private bool gameOver = false;
-    private bool endLevel = false;
-    private bool waterLoss = false;
-    private bool frontGround = false;
-    private bool backGround =  false;
-    private bool lossToPosition = false;
     public float maxLife;
     public float roundsPlayed;
+    private int counter = 5;
+
     public UnityEvent lifeChanged = new UnityEvent();
     public UnityEvent roundsChanged = new UnityEvent();
+    public UnityEvent winLevelOne = new UnityEvent();
+    public UnityEvent panalLoss = new UnityEvent();
     
-    public bool Freeze{
-        get
-        {
-            return this.freeze;
-        }
-        set
-        {
-            this.freeze = value;
-        }
-    }
-    public bool WaterLoss{
-        get
-        {
-            return this.waterLoss;
-        }
-        set
-        {
-            this.waterLoss = value;
-        }
-    }
-    public bool FrontGround{
-        get
-        {
-            return this.frontGround;
-        }
-        set
-        {
-            this.frontGround = value;
-        }
-    }
-    public bool BackGround{
-        get
-        {
-            return this.backGround;
-        }
-        set
-        {
-            this.backGround = value;
-        }
-    }
-    public bool LossToPosition{
-        get
-        {
-            return this.lossToPosition;
-        }
-        set
-        {
-            this.lossToPosition = value;
-        }
-    }
-    public bool GameOver{
-        get
-        {
-            return this.gameOver;
-        }
-        set
-        {
-            this.gameOver = value;
-        }
-    }
-      public bool EndLevel{
-        get
-        {
-            return this.endLevel;
-        }
-        set
-        {
-            this.endLevel = value;
-        }
-    }
-
     public static void Load()
     {
         nextScene = SceneManager.GetActiveScene().buildIndex;
@@ -103,67 +30,40 @@ public class GameManager : MonoBehaviour
             instance = this;  
             DontDestroyOnLoad(gameObject);
        } 
-        SceneManager.LoadScene(1);
+       SceneManager.LoadScene(1);
     }
-
     public void StartLevelOne()
     {
-        maxLife = 10f;
+        maxLife = 3f;
         roundsPlayed = 0f;
         SceneManager.LoadScene(2);
     }
-
-    public void ToReplayLevelOne()
-    {
-        SceneManager.LoadScene(2);
+    public void ToLoss()
+    { 
+        CollisionCounter();
+        TOGameOver();
     }
-
-    public void StartLevelTwo()
-    {
-        SceneManager.LoadScene(3);
+     private void CollisionCounter(){
+        --counter;
+        if (counter == 0)
+        {
+            --maxLife;
+            counter = 5;
+            panalLoss.Invoke();
+            lifeChanged.Invoke();
+        }
     }
-
-    public void TOGameOver(){
-  
-        gameOver = true;
+     public void TOGameOver(){
+        if(maxLife == 0)
+        {
+            SceneManager.LoadScene(4);  
+        }
     }
-    public void GameOverLevelTwo(){
-  
-         SceneManager.LoadScene(4);
-    }
-
+    
     public void ToWinLevelOne(){
-        ++roundsPlayed; 
+        roundsPlayed = 1; 
         lifeChanged.Invoke();
         roundsChanged.Invoke();
-    }
-
-     public void ToWinLevelTwo(){
-        ++roundsPlayed;
-        SceneManager.LoadScene(4);
-    }
-
-    public void ToLoss()
-    {
-        --maxLife; 
-        lifeChanged.Invoke();
-       
-        if(maxLife == 0 && !endLevel)
-        {
-            TOGameOver();  
-        }
-        else if(maxLife == 0 && endLevel)
-        {
-            GameOverLevelTwo();
-        }
-        else if (WaterLoss)
-        {    
-            Freeze = true;
-            WaterLoss = false; 
-        }
-        else if (LossToPosition)
-        {
-            LossToPosition = false;
-        }
+        winLevelOne.Invoke();
     }
 }

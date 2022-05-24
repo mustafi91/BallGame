@@ -8,9 +8,8 @@ public class Spinner : MonoBehaviour
    public float yAngle = 0.2f;
    public float zAngle = 0;
 
-    // Update is called once per frame
     void Update()
     {
-        transform.Rotate(xAngle, yAngle, zAngle);
+        transform.Rotate(xAngle, yAngle, zAngle);      
     }
 }

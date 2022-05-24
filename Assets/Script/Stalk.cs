@@ -9,13 +9,8 @@ public class Stalk : MonoBehaviour
     private float thrustY = 0f;
     private float thrustZ = 0.02f;
     private bool reverse = false;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+   
 
-    // Update is called once per frame
     void Update()
     {
         if (!reverse)
