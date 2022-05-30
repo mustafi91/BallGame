@@ -12,6 +12,25 @@ TagManager:
   - Water
   - firstLevelWin
   - twoLevelWin
+  - BackWall
+  - FrontWall
+  - Fire
+  - LossGround
+  - StarSparrow
+  - SmallWall
+  - MissilePlayer
+  - Missile
+  - BigWall
+  - FireWall
+  - GreenDoor
+  - Coin
+  - ThrowLocation
+  - SlowDown
+  - Serrated
+  - Bomb
+  - ThrowRightLocation
+  - ThrowCenterLocation
+  - ThrowLeftLocation
   layers:
   - Default
   - TransparentFX

@@ -8,17 +8,15 @@ public class BallController : MonoBehaviour
     private Rigidbody rg;
     public InputAction move;
     private Vector2 movement;
-    public float moveSpeed = 100f;
+    public float moveSpeed;
     private float mainThrust = 500f;
-    private float wandThrust = 300f;
     private bool toJump = false;
     private bool frontDirection = true;
+    private bool slowDown = false;
     
     void Start()
     {
         rg = GetComponent<Rigidbody>();
-        // GameManager.instance.freezeActive.AddListener(ToFreezeActive);
-        // GameManager.instance.freezeInactive.AddListener(ToFreezeInactive); 
     }
 
     void Update()
@@ -39,19 +37,40 @@ public class BallController : MonoBehaviour
         move.Disable();
     }
 
+ 
     private void ToMove()
     {
         var input = move.ReadValue<Vector2>();
 
         if (frontDirection)
         {
-            var vector = new Vector3(-input.y, 0, input.x);
-            rg.AddForce(vector * moveSpeed * Time.deltaTime); 
+            if (slowDown)
+            {
+                moveSpeed = 50f;
+                var vector = new Vector3(input.x/4, 0, input.y/4);
+                rg.AddForce(vector * moveSpeed * Time.deltaTime);    
+            }
+            else
+            {
+                moveSpeed = 100f;
+                var vector = new Vector3(input.x, 0, input.y);
+                rg.AddForce(vector * moveSpeed * Time.deltaTime);  
+            }
         }
         else
         {
-            var vector = new Vector3(input.y, 0, -input.x);
-            rg.AddForce(vector * moveSpeed * Time.deltaTime); 
+            if (slowDown)
+            {
+                moveSpeed = 50f;
+                var vector = new Vector3(-input.x/4, 0, -input.y/4);
+                rg.AddForce(vector * moveSpeed * Time.deltaTime);    
+            }
+            else
+            {
+                moveSpeed = 100f;
+                var vector = new Vector3(-input.x, 0, -input.y);
+                rg.AddForce(vector * moveSpeed * Time.deltaTime);  
+            }
         }
     }
 
@@ -76,49 +95,26 @@ public class BallController : MonoBehaviour
         }
     }
 
-    public void ToJumpOnLeftWall(float thrust)
-    {
-        if (frontDirection)
-        {
-           rg.AddForce(-thrust, thrust, thrust);  
-        }
-        else
-        {
-           rg.AddForce(+thrust, thrust, +thrust);   
-        }
-    }
-
-    private void ToJumpOnRightWall(float thrust)
-    {
-        if (frontDirection)
-        {
-            rg.AddForce(-thrust, thrust, -thrust);
-        }
-        else
-        {
-            rg.AddForce(+thrust, thrust, -thrust);   
-        }
-    }
-
      public void ToChangeFreezeActive(){
-        if (Keyboard.current.enterKey.wasPressedThisFrame)
+        if (Keyboard.current.enterKey.wasPressedThisFrame && toJump)
         {
            rg.isKinematic = !rg.isKinematic;
         }
     }
-     void OnCollisionEnter(Collision collision)
+    void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag("Ground") || collision.gameObject.CompareTag("Stalk"))
         {
             toJump = true;
+            slowDown = false;  
         }
-        else if (collision.gameObject.CompareTag("LeftWall") && toJump == false)
+        else if (collision.gameObject.CompareTag("SlowDown"))
         {
-            ToJumpOnLeftWall(wandThrust);
-        }
-        else if (collision.gameObject.CompareTag("RightWall") && toJump == false)
-        {
-            ToJumpOnRightWall(wandThrust);
+            slowDown = true;
         }
     }
 }
+    
+
+
+

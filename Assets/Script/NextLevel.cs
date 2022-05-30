@@ -7,7 +7,7 @@ public class NextLevel : MonoBehaviour
 
     public void ToNextLevel()
     {
-        GameManager.instance.StartLevelOne();
+        GameManager.instance.StartLevelTwo();
     }
 
 }

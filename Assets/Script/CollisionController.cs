@@ -5,7 +5,8 @@ using UnityEngine;
 public class CollisionController : MonoBehaviour
 {
   
-    public GameObject frontWharf;
+    public GameObject waterPosition;
+    public GameObject firePosition;
     private Vector3 startPoint;
     private Rigidbody rg;
     void Start()
@@ -15,23 +16,40 @@ public class CollisionController : MonoBehaviour
     }
     void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag("Spinner"))
+        if (collision.gameObject.CompareTag("Spinner") ||
+         collision.gameObject.CompareTag("LossGround"))
         {
             GameManager.instance.ToLoss();
-            rg.isKinematic = !rg.isKinematic;
             transform.position = startPoint;
         }
         else if (collision.gameObject.CompareTag("Water"))
         {
             GameManager.instance.ToLoss();
-            rg.isKinematic = !rg.isKinematic;
-            transform.position = frontWharf.transform.position;
+            transform.position = waterPosition.transform.position;
            
+        }
+         else if (collision.gameObject.CompareTag("Fire"))
+        {
+            GameManager.instance.ToLoss();
+            transform.position = firePosition.transform.position;
+           
+        }
+        else if (collision.gameObject.CompareTag("Missile") ||
+                collision.gameObject.CompareTag("Bomb"))
+        {
+            GameManager.instance.ToLoss();
         }
         else if (collision.gameObject.CompareTag("firstLevelWin"))
         {
             GameManager.instance.ToWinLevelOne();
         }
-
+        else if (collision.gameObject.CompareTag("twoLevelWin"))
+        {
+            GameManager.instance.ToWinLevelTwo();
+        }
+        else if (collision.gameObject.CompareTag("Ground"))
+        {
+            CannonPlayerController.throwLocation = false;  
+        }
     }
 }

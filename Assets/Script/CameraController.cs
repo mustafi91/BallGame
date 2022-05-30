@@ -14,6 +14,9 @@ public class CameraController : MonoBehaviour
     private Quaternion backTarget;
     private bool back = false;
     private bool front = false;
+      public float x =0;
+    public float y =0;
+    public float z =0;
     
     
     void Start()
@@ -40,8 +43,8 @@ public class CameraController : MonoBehaviour
     private void toDirection(){
         if(Keyboard.current.bKey.wasPressedThisFrame && !back )
         {
-            backCameraPosition = new Vector3(-15f,0f,0f);
-            backTarget = Quaternion.Euler(45f, 90f, 0f);
+            backCameraPosition = new Vector3(0f,0f,30f);
+            backTarget = Quaternion.Euler(30f, 180f,0f);
             cameraPosition =  transform.position - player.transform.position + backCameraPosition;
             transform.rotation = Quaternion.Slerp(transform.rotation, backTarget, 2f);
             back = !back;
@@ -49,8 +52,8 @@ public class CameraController : MonoBehaviour
         }
         else if(Keyboard.current.vKey.wasPressedThisFrame && front )
         {
-            backCameraPosition = new Vector3(15f,0f,0f);
-            backTarget = Quaternion.Euler(45f, -90f, 0f);
+            backCameraPosition = new Vector3(0f,0f,-30f);
+            backTarget = Quaternion.Euler(15f, 0,0);
             cameraPosition =  transform.position - player.transform.position + backCameraPosition;
             transform.rotation = Quaternion.Slerp(transform.rotation, backTarget, 2f);
             back = !back;

@@ -9,15 +9,15 @@ EditorBuildSettings:
     path: Assets/Scenes/Preload.unity
     guid: 526c1baff78894b569bad84ebddeca8e
   - enabled: 1
-    path: Assets/Scenes/Start.unity
-    guid: e62d00ae8d1dc4855b0454cb957c1fc3
+    path: Assets/Scenes/start.unity
+    guid: 2fead4e074eab4006bb1a9b3c55a2b14
   - enabled: 1
     path: Assets/Scenes/Level1.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
   - enabled: 1
-    path: Assets/Scenes/Level2.unity
-    guid: 711a59f0f50a348799129644f31e45bb
+    path: Assets/Scenes/Level-2.unity
+    guid: b4b6b58524e034b78bf314f2857f1d20
   - enabled: 1
     path: Assets/Scenes/End.unity
-    guid: ca5045805a4fb4c43928b0a9aeb80d3b
+    guid: ce314a965e82344faadca9e9f7ae317f
   m_configObjects: {}
