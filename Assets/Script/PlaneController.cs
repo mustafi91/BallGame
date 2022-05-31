@@ -12,10 +12,10 @@ public class PlaneController : MonoBehaviour
     public GameObject bomb;
     private Rigidbody rb;
     private Rigidbody planeRigidBody;
-    public GameObject bigExplosion;
-    public GameObject fire;
-    GameObject bigExplosionInstace;
-    GameObject fireInstace;
+    // public GameObject bigExplosion;
+    // public GameObject fire;
+    // GameObject bigExplosionInstace;
+    // GameObject fireInstace;
    
     void Start()
     {
@@ -34,11 +34,11 @@ public class PlaneController : MonoBehaviour
            BombInstantiated();    
         }
 
-        if (bigExplosionInstace != null && fireInstace != null)
-        {
-            fireInstace.transform.position = transform.position;
-            bigExplosionInstace.transform.position = transform.position;
-        }
+        // if (bigExplosionInstace != null && fireInstace != null)
+        // {
+        //     fireInstace.transform.position = transform.position;
+        //     bigExplosionInstace.transform.position = transform.position;
+        // }
 
     }
 
@@ -60,10 +60,10 @@ public class PlaneController : MonoBehaviour
                 GameManager.instance.CollectionOfManey();    
             }
             planeRigidBody.isKinematic = false;
-            bigExplosionInstace = Instantiate(bigExplosion,transform.position,transform.rotation);
-            fireInstace = Instantiate(fire,transform.position,transform.rotation);
-            Destroy(bigExplosionInstace, 5f); 
-            Destroy(fireInstace, 5f);
+            // bigExplosionInstace = Instantiate(bigExplosion,transform.position,transform.rotation);
+            // // fireInstace = Instantiate(fire,transform.position,transform.rotation);
+            // Destroy(bigExplosionInstace, 5f); 
+            // Destroy(fireInstace, 5f);
             Destroy(this, 5f);
         }
     }

@@ -184,7 +184,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3fef39c1ae28747b9b91361da2ca76b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  samallBomb: {fileID: 1000011797152326, guid: acf39d9f4addf294d93fa56fa373961b, type: 3}
+  samallBomb: {fileID: 1040074329139878, guid: fa8aadfb07ca2034188c69c6f2ab4624, type: 3}
 --- !u!65 &-5007001132467608024
 BoxCollider:
   m_ObjectHideFlags: 0
