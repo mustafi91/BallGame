@@ -5,9 +5,17 @@ using UnityEngine;
 public class NextLevel : MonoBehaviour
 {
 
-    public void ToNextLevel()
+    public void LoadNextLevel()
     {
-        GameManager.instance.StartLevelTwo();
+        GameManager.instance.LoadNextLevel();
+    }
+    public void ReloadLevel()
+    {
+        GameManager.instance.ReloadCurrentLevel();
+    }
+    public void QuiteGame()
+    {
+        UnityEditor.EditorApplication.isPlaying = false;
     }
 
 }

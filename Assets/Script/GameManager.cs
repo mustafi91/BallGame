@@ -40,7 +40,7 @@ public class GameManager : MonoBehaviour
         maxLife = 3f;
         roundsPlayed = 0f;
         coinsNumber = 0f;
-        SceneManager.LoadScene(2);
+        SceneManager.LoadScene(3);
     }
 
     public void StartLevelTwo()
@@ -50,14 +50,30 @@ public class GameManager : MonoBehaviour
 
     public void ReloadCurrentLevel()
     {
+        --roundsPlayed; 
         int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
-        SceneManager.LoadScene(currentSceneIndex);
+        SceneManager.LoadScene(currentSceneIndex+1);
+    }
+    public void LoadNextLevel()
+    {
+        int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
+        if (roundsPlayed == 1)
+        {
+            SceneManager.LoadScene(currentSceneIndex+2);  
+        }
+        else if (roundsPlayed == 2)
+        {
+            SceneManager.LoadScene(currentSceneIndex+3); 
+        }
     }
 
     public void ToLoss()
     { 
         CollisionCounter();
-        TOGameOver();
+        if (maxLife == 0)
+        {
+            TOGameOver();    
+        }
     }
 
     private void CollisionCounter()
@@ -72,29 +88,18 @@ public class GameManager : MonoBehaviour
         }
     }
     public void TOGameOver(){
-        if(maxLife == 0)
-        {
-            SceneManager.LoadScene(4); 
-            lifeChanged.Invoke();
-            roundsChanged.Invoke();
-            scoreChanged.Invoke(); 
-        }
-    }
-    
-    public void ToWinLevelOne(){
-        roundsPlayed = 1; 
+        SceneManager.LoadScene(6); 
         lifeChanged.Invoke();
         roundsChanged.Invoke();
         scoreChanged.Invoke(); 
-        winLevelOne.Invoke();
     }
-
-    public void ToWinLevelTwo(){
-            roundsPlayed = 2;
-            lifeChanged.Invoke();
-            roundsChanged.Invoke();
-            scoreChanged.Invoke(); 
-            SceneManager.LoadScene(4); 
+    
+    public void ToWinLevel(){
+        ++roundsPlayed; 
+        lifeChanged.Invoke();
+        roundsChanged.Invoke();
+        scoreChanged.Invoke(); 
+        SceneManager.LoadScene(2); 
     }
 
     public void CollectionOfManey()

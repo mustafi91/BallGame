@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class PlaneController : MonoBehaviour
 {
-    private int timer = 1;
     private float thrustX = 0f;
     private float thrustY = 0f;
     private float thrustZ = 1f;
@@ -12,10 +11,7 @@ public class PlaneController : MonoBehaviour
     public GameObject bomb;
     private Rigidbody rb;
     private Rigidbody planeRigidBody;
-    // public GameObject bigExplosion;
-    // public GameObject fire;
-    // GameObject bigExplosionInstace;
-    // GameObject fireInstace;
+    private int randnum;
    
     void Start()
     {
@@ -26,19 +22,13 @@ public class PlaneController : MonoBehaviour
 
     void Update()
     {
-        ++timer;
         transform.Translate(thrustX,thrustY,thrustZ);  
         rb.isKinematic = false;
-        if (timer % 183 == 0)
+        randnum = Random.Range(0, 100);
+        if (randnum ==5)
         {
            BombInstantiated();    
         }
-
-        // if (bigExplosionInstace != null && fireInstace != null)
-        // {
-        //     fireInstace.transform.position = transform.position;
-        //     bigExplosionInstace.transform.position = transform.position;
-        // }
 
     }
 
@@ -60,10 +50,6 @@ public class PlaneController : MonoBehaviour
                 GameManager.instance.CollectionOfManey();    
             }
             planeRigidBody.isKinematic = false;
-            // bigExplosionInstace = Instantiate(bigExplosion,transform.position,transform.rotation);
-            // // fireInstace = Instantiate(fire,transform.position,transform.rotation);
-            // Destroy(bigExplosionInstace, 5f); 
-            // Destroy(fireInstace, 5f);
             Destroy(this, 5f);
         }
     }

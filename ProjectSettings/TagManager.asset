@@ -31,6 +31,8 @@ TagManager:
   - ThrowRightLocation
   - ThrowCenterLocation
   - ThrowLeftLocation
+  - EndGame
+  - Spider
   layers:
   - Default
   - TransparentFX

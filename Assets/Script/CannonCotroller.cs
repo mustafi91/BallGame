@@ -7,11 +7,11 @@ public class CannonCotroller : MonoBehaviour
     public Transform player;
     public GameObject missile;
     private Rigidbody rb;
-    private int timer = 1;
     private float range = 25f;
     private float thrustX = 0f;
     private float thrustY = 0f;
     private float thrustZ = 0.1f;
+    private int randnum;
     GameObject[] missiles;
    
     void Start()
@@ -35,8 +35,6 @@ public class CannonCotroller : MonoBehaviour
 
     void MakeAndThrowMissile()
     {
-        ++timer;
-
         missiles = GameObject.FindGameObjectsWithTag("Missile");
 
         foreach (GameObject missile in missiles)
@@ -45,7 +43,8 @@ public class CannonCotroller : MonoBehaviour
             Destroy(missile, 25f);  
         }
 
-        if (timer % 183 == 0)
+        randnum = Random.Range(0, 100);
+        if (randnum == 5)
         {
            GameObject missileInstance = Instantiate(missile, transform.position, transform.rotation); 
         } 

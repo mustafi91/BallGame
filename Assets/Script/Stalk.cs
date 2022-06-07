@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class Stalk : MonoBehaviour
 {
-    private float thrustX = 0.04f;
+    private float thrustX = 0f;
     private float thrustY = 0f;
-    private float thrustZ = 0f;
+    private float thrustZ = 0.04f;
     private bool reverse = false;
    
 
@@ -14,7 +14,7 @@ public class Stalk : MonoBehaviour
     {
         if (!reverse)
         {
-            transform.Translate(-thrustX,thrustY,thrustZ);  
+            transform.Translate(thrustX,thrustY,-thrustZ);  
         }
         else
         {

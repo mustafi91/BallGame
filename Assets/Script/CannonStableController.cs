@@ -6,8 +6,8 @@ public class CannonStableController : MonoBehaviour
 {
     public GameObject missile;
     private Rigidbody rb;
-    private int timer = 1;
     public float throwForce = 4000;
+    private int randnum;
    
     void Start()
     {
@@ -21,8 +21,8 @@ public class CannonStableController : MonoBehaviour
 
     void MakeAndThrowMissile()
     {
-        ++timer;
-        if (timer % 183 == 0)
+        randnum = Random.Range(0, 100);
+        if (randnum ==5)
         {
            GameObject missileInstance = Instantiate(missile, transform.position, transform.rotation);
            missileInstance.GetComponent<Rigidbody>().AddForce(transform.forward * throwForce);

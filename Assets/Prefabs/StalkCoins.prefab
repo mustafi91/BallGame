@@ -149,7 +149,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4048155ced954955a0c865d3668eafd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
   xAngle: 0
   yAngle: 0
   zAngle: 2
@@ -262,7 +261,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4048155ced954955a0c865d3668eafd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
   xAngle: 0
   yAngle: 0
   zAngle: 2
@@ -375,7 +373,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4048155ced954955a0c865d3668eafd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
   xAngle: 0
   yAngle: 0
   zAngle: 2
@@ -488,7 +485,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4048155ced954955a0c865d3668eafd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
   xAngle: 0
   yAngle: 0
   zAngle: 2
@@ -601,7 +597,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4048155ced954955a0c865d3668eafd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
   xAngle: 0
   yAngle: 0
   zAngle: 2
@@ -714,7 +709,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4048155ced954955a0c865d3668eafd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
   xAngle: 0
   yAngle: 0
   zAngle: 2
@@ -827,7 +821,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4048155ced954955a0c865d3668eafd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
   xAngle: 0
   yAngle: 0
   zAngle: 2
@@ -940,7 +933,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4048155ced954955a0c865d3668eafd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
   xAngle: 0
   yAngle: 0
   zAngle: 2
@@ -1053,7 +1045,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4048155ced954955a0c865d3668eafd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
   xAngle: 0
   yAngle: 0
   zAngle: 2
@@ -1166,7 +1157,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4048155ced954955a0c865d3668eafd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
   xAngle: 0
   yAngle: 0
   zAngle: 2

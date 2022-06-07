@@ -15,7 +15,7 @@ public class BombController : MonoBehaviour
         || collision.gameObject.CompareTag("Spinner")
         || collision.gameObject.CompareTag("BackWall"))
         {
-            for (int i = 0; i < 10; i++)
+            for (int i = 0; i < 5; i++)
             {
                 GameObject smallBombInstance = Instantiate(samallBomb,transform.position,transform.rotation);
                 Destroy(this);

@@ -19,7 +19,7 @@ public class MissilePlayerController : MonoBehaviour
         if (other.name == "Player")
         {
             Destroy(gameObject);
-            CannonPlayerController.numberOfMissiles = 30;   
+            CannonPlayerController.numberOfMissiles = 90;   
         }
     }
 

@@ -17,9 +17,9 @@ public class CollisionController : MonoBehaviour
     void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag("Spinner") ||
-         collision.gameObject.CompareTag("LossGround"))
+            collision.gameObject.CompareTag("LossGround"))
         {
-            GameManager.instance.ToLoss();
+           GameManager.instance.ToLoss();
             transform.position = startPoint;
         }
         else if (collision.gameObject.CompareTag("Water"))
@@ -39,13 +39,18 @@ public class CollisionController : MonoBehaviour
         {
             GameManager.instance.ToLoss();
         }
-        else if (collision.gameObject.CompareTag("firstLevelWin"))
+        else if (collision.gameObject.CompareTag("Spider"))
         {
-            GameManager.instance.ToWinLevelOne();
+            GameManager.instance.ToLoss();
         }
-        else if (collision.gameObject.CompareTag("twoLevelWin"))
+        else if (collision.gameObject.CompareTag("firstLevelWin") || 
+                 collision.gameObject.CompareTag("twoLevelWin"))
         {
-            GameManager.instance.ToWinLevelTwo();
+            GameManager.instance.ToWinLevel();
+        }
+        else if (collision.gameObject.CompareTag("EndGame"))
+        {
+            GameManager.instance.TOGameOver(); 
         }
         else if (collision.gameObject.CompareTag("Ground"))
         {
